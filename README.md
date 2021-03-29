@@ -1,4 +1,3 @@
-# dnada
 
 # Coding Ground for Datastructures and Algorithm
 Topics included
