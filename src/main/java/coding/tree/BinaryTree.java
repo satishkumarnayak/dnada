@@ -62,4 +62,27 @@ public class BinaryTree {
     return null;
   }
 
+  public int min() {
+    if (root == null) {
+      return -1;
+    }
+    Node current = root;
+    while (current.left != null) {
+      current = current.left;
+    }
+    return current.key;
+
+  }
+  
+  public int max() {
+    if (root == null) {
+      return -1;
+    }
+    Node current = root;
+    while(current.right != null) {
+      current = current.right;
+    }
+    return current.key;
+  }
+
 }

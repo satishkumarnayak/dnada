@@ -27,6 +27,10 @@ public class BinaryTreeTest {
     assertEquals(true, tree.binarySearch(5));
     assertEquals(false, tree.binarySearch(10));
     assertEquals(true, tree.binarySearch(6));
+    
+    assertEquals(2, tree.min());
+    assertEquals(8, tree.max());
+  
   }
 
 }
