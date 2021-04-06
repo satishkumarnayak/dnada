@@ -88,18 +88,18 @@ public class BinaryTree {
   public void delete(int key) {
 
     Node nodeToDel = null;
-    nodeToDel = findNode(root, key);
+    nodeToDel = deleteNode(root, key);
 
   }
 
 
-  private Node findNode(Node node, int key) {
+  private Node deleteNode(Node node, int key) {
     if (node == null) {
       return null;
     } else if (key < node.key) {
-      node.left = findNode(node.left, key);
+      node.left = deleteNode(node.left, key);
     } else if (key > node.key) {
-      node.right = findNode(node.right, key);
+      node.right = deleteNode(node.right, key);
     } else {
       // case 1 : with no child
       if (node.left == null && node.right == null) {
@@ -116,14 +116,16 @@ public class BinaryTree {
       }
       // case 3 : with two child
       else if (node.left != null && node.right != null) {
-          // find minimum node
+          // find max right node(or min of left node)
         Node current = node;  
-        while(current != null && current.left != null) {
-          current = current.left;
+        while(current != null && current.right != null) {
+          current = current.right;
         }        
-        // swap find node and min code
-        node = current;
-        current = null;
+        // copy find node and max code
+        node.key = current.key;
+        node.data=current.data;
+        
+        node.right = deleteNode(node.right,node.key);
       }
 
     }
