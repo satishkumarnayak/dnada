@@ -7,66 +7,102 @@ import java.util.List;
 
 public class Graph {
 
-	private int V; // number of vertices
-	private LinkedList<Integer> adj[]; // array of adjacency list
+  private int V; // number of vertices
+  private LinkedList<Integer> adj[]; // array of adjacency list
 
-	public Graph(int v) {
-		this.V = v;
-		adj = new LinkedList[v];
-		for (int i = 0; i < v; i++) {
-			adj[i] = new LinkedList<Integer>();
-		}
-	}
+  public Graph(int v) {
+    this.V = v;
+    adj = new LinkedList[v];
+    for (int i = 0; i < v; i++) {
+      adj[i] = new LinkedList<Integer>();
+    }
+  }
 
-	public void addEdge(int v, int w) {
-		adj[v].add(w);
-	}
+  public void addEdge(int v, int w) {
+    adj[v].add(w);
+  }
 
-	// s -> starting node
-	public void BFS(int s) {
+  // s -> starting node
+  public void BFS(int s) {
 
-		// to track visited nodes
-		boolean visited[] = new boolean[V];
+    // to track visited nodes
+    boolean visited[] = new boolean[V];
 
-		// queue to manuver nodes
-		LinkedList<Integer> queue = new LinkedList<Integer>();
-		
-		List<Integer> path = new ArrayList<Integer>();
+    // queue to manuver nodes
+    LinkedList<Integer> queue = new LinkedList<Integer>();
 
-		// mark the starting node as visited
-		visited[s] = true;
-		System.out.println("Starting at -->" + s);
-		// add that in the queue
-		queue.add(s);
-		path.add(s);
+    List<Integer> path = new ArrayList<Integer>();
 
-		while (queue.size() != 0) {
+    // mark the starting node as visited
+    visited[s] = true;
+    System.out.println("Starting at -->" + s);
+    // add that in the queue
+    queue.add(s);
+    path.add(s);
 
-			// pop out thenode from queue
-			int vertex = queue.pop();
-			System.out.println("Dequeing -->" + vertex);
-			LinkedList<Integer> neigbours = adj[vertex];
+    while (queue.size() != 0) {
 
-			while (neigbours.size() != 0) {
-				int neighb = neigbours.pop();
+      // pop out thenode from queue
+      int vertex = queue.pop();
+  //    System.out.println("Dequeing -->" + vertex);
+      LinkedList<Integer> neigbours = adj[vertex];
 
-				if (!visited[neighb]) {
-					queue.add(neighb);
-					System.out.println("Queueing--->" + neighb);
-					visited[neighb] = true;
-					path.add(neighb);
-					
-				}
-			}
+      while (neigbours.size() != 0) {
+        int neighb = neigbours.pop();
 
-		}
-		
-		System.out.println("BFS Path --> ");
-		for(Integer i :path) {
-			System.out.print(i+"-");
-			
-		}
+        if (!visited[neighb]) {
+          queue.add(neighb);
+    //      System.out.println("Queueing--->" + neighb);
+          visited[neighb] = true;
+          path.add(neighb);
 
-	}
+        }
+      }
+
+    }
+
+    System.out.println("BFS Path --> ");
+    for (Integer i : path) {
+      System.out.print(i + "-");
+
+    }
+
+  }
+
+  public void DFS(int s) {
+
+    LinkedList<Integer> stack = new LinkedList<Integer>();
+    boolean[] visited = new boolean[V];
+    List<Integer> path = new ArrayList<Integer>();
+
+    stack.push(s);
+    path.add(s);
+    visited[s] = true;
+
+
+    while (stack.size() > 0) {
+      Integer vertex = stack.pop();
+      LinkedList<Integer> neighbours = adj[vertex];
+      while (neighbours.size() > 0) {
+        int neighb = neighbours.pop();
+        if (visited[neighb] == false) {
+          stack.push(neighb);
+          path.add(neighb);
+          visited[neighb] = true;
+
+        }
+      }
+
+    }
+    
+    System.out.println("DFS Path --> ");
+    for (Integer i : path) {
+      System.out.print(i + "-");
+
+    }
+
+  }
+
+
 
 }
